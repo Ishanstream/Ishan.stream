@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engagement Memories | ISHAN Stream</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:       #080706;
+            --bg2:      #0e0d0b;
+            --gold:     #c9a96e;
+            --gold-dim: #8a6e45;
+            --cream:    #f0e8d8;
+            --text:     #ede8e0;
+            --muted:    #7a7269;
+            --border:   rgba(201,169,110,0.15);
+            --border2:  rgba(201,169,110,0.30);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ── Grain Overlay ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ── TOP BAR ── */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 48px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(8,7,6,0.9) 0%, transparent 100%);
+        }
+
+        .topbar-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            letter-spacing: 0.18em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .topbar-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            color: var(--muted);
+            text-transform: uppercase;
+            display: none; /* Hidden on very small screens, shown via media query */
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,169,110,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(201,169,110,0.03) 0%, transparent 60%);
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 1s 0.2s forwards;
+        }
+
+        .ornament-line {
+            width: clamp(30px, 10vw, 60px);
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .ornament-line.right {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .ornament-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.6;
+        }
+
+        .ornament span {
+            font-size: 0.62rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-family: 'Syne', sans-serif;
+            font-weight: 500;
+        }
+
+        .hero-wordmark {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.5rem, 12vw, 8rem);
+            letter-spacing: 0.12em;
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: var(--cream);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp 1.1s 0.4s forwards;
+        }
+
+        .hero-wordmark span {
+            color: var(--gold);
+        }
+
+        .hero-subtitle-block {
+            opacity: 0;
+            animation: fadeUp 1.1s 0.6s forwards;
+            padding: 0 15px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-style: normal;
+            font-size: clamp(2.4rem, 8vw, 5.5rem);
+            color: var(--cream);
+            letter-spacing: 0.06em;
+            line-height: 1.05;
+            margin-bottom: 28px;
+            text-shadow: 0 0 60px rgba(201,169,110,0.2);
+        }
+
+        .hero-desc {
+            font-size: clamp(0.8rem, 2vw, 0.85rem);
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            max-width: 440px;
+            line-height: 1.9;
+            margin: 0 auto;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeIn 1.5s 1.4s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        .scroll-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.4em;
+            color: var(--muted);
+            text-transform: uppercase;
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 48px;
+            margin: 0 0 80px;
+        }
+
+        .section-divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border2), transparent);
+        }
+
+        .section-divider-diamond {
+            width: 6px;
+            height: 6px;
+            background: var(--gold-dim);
+            transform: rotate(45deg);
+        }
+
+        /* ── VIDEOS SECTION ── */
+        .videos-section {
+            padding: 0 48px 120px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-eyebrow {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.45em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: var(--cream);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+        }
+
+        .section-count {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        /* ── VIDEO GRID ── */
+        .video-grid {
+            display: grid;
+            gap: 2px;
+        }
+
+        .row-2 { grid-template-columns: 1fr 1fr; }
+        .row-1 { grid-template-columns: 1fr; }
+
+        /* ── VIDEO CARD ── */
+        .video-card {
+            position: relative;
+            overflow: visible;   /* allow caption to show below */
+            background: var(--bg2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Border on wrapper, not card (since overflow:visible) */
+        .video-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            transition: border-color 0.6s ease;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .video-card:hover .video-wrapper::after {
+            border-color: var(--border2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-card.featured .video-wrapper {
+            aspect-ratio: 21/9;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-card:hover video {
+            transform: scale(1.03);
+        }
+
+        /* Elements that hide when video plays */
+        .interactive-ui {
+            transition: opacity 0.4s ease;
+        }
+
+        /* On play — overlay + title inside box fade out */
+        .video-card.playing .interactive-ui {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ── VIDEO CAPTION (shows BELOW box on play) ── */
+        .video-caption {
+            background: var(--bg2);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1),
+                        padding 0.35s ease,
+                        opacity 0.35s ease;
+            padding: 0 24px;
+            opacity: 0;
+            border-top: 1px solid transparent;
+        }
+
+        .video-card.playing .video-caption {
+            max-height: 130px;
+            padding: 18px 24px 20px;
+            opacity: 1;
+            border-top-color: var(--border);
+        }
+
+        .video-caption .video-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.22em;
+            margin-bottom: 4px;
+            opacity: 0.75;
+        }
+
+        .video-caption .video-category {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.54rem;
+            letter-spacing: 0.38em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+            opacity: 0.65;
+        }
+
+        .video-caption .video-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(0.95rem, 2vw, 1.4rem);
+            color: var(--cream);
+            line-height: 1.25;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(8,7,6,0.95) 0%,
+                rgba(8,7,6,0.3) 50%,
+                transparent 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .video-info {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 28px 32px;
+            z-index: 3;
+            transform: translateY(4px);
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .video-card:hover .video-info {
+            transform: translateY(0);
+        }
+
+        .video-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .video-category {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 7px;
+            display: block;
+            opacity: 0.75;
+        }
+
+        .video-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            color: var(--cream);
+            letter-spacing: 0.01em;
+            line-height: 1.25;
+        }
+
+        .video-card.featured .video-title {
+            font-size: clamp(1.2rem, 3vw, 2.1rem);
+        }
+
+        /* Show play button by default on mobile so users know it's a video */
+        @media (max-width: 768px) {
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 100px 48px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(1.2rem, 3vw, 1.9rem);
+            color: var(--text);
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            letter-spacing: 0.01em;
+        }
+
+        .footer-quote em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .footer-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 48px;
+        }
+
+        .footer-ornament-line {
+            width: 80px;
+            height: 1px;
+            background: var(--border2);
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            letter-spacing: 0.22em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .footer-copy {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            color: var(--muted);
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50%       { opacity: 1;   transform: scaleY(1.1); }
+        }
+
+        /* Scroll reveal - modified for safety on Vercel */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+            will-change: opacity, transform;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ── RESPONSIVE COMPREHENSIVE FIXES ── */
+        @media (min-width: 769px) {
+            .topbar-tag { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .topbar { padding: 20px 24px; }
+            .videos-section { padding: 0 16px 80px; }
+            .section-divider { padding: 0 16px; margin: 0 0 50px; }
+            .row-2 { grid-template-columns: 1fr; }
+            
+            /* Give all videos a standard ratio on mobile */
+            .video-card.featured .video-wrapper,
+            .video-wrapper { 
+                aspect-ratio: 16/9; 
+            }
+            
+            .video-info { 
+                padding: 20px; 
+                transform: translateY(0); /* Always show standard placement on mobile */
+            }
+            
+            .section-header { 
+                margin-bottom: 40px; 
+            }
+            
+            footer { padding: 70px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="topbar">
+        <div class="topbar-logo">ISHAN Stream</div>
+        <div class="topbar-tag">Engagement Memories &mdash; 2026</div>
+    </nav>
+
+    <header class="hero">
+        <div class="ornament">
+            <div class="ornament-line"></div>
+            <div class="ornament-dot"></div>
+            <span>ISHAN Stream Presents</span>
+            <div class="ornament-dot"></div>
+            <div class="ornament-line right"></div>
+        </div>
+
+        <div class="hero-wordmark">ISHAN <span>Stream</span></div>
+
+        <div class="hero-subtitle-block">
+            <div class="hero-title">Engagement Memories</div>
+            <p class="hero-desc">A cinematic journey of love, family, and a beautiful new beginning. Roka &amp; Engagement highlights.</p>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            <span class="scroll-label">Scroll</span>
+        </div>
+    </header>
+
+    <div class="section-divider reveal">
+        <div class="section-divider-line"></div>
+        <div class="section-divider-diamond"></div>
+        <div class="section-divider-line"></div>
+    </div>
+
+    <section class="videos-section">
+
+        <div class="section-header reveal">
+            <div>
+                <div class="section-eyebrow">The Collection</div>
+                <h2 class="section-title">Five chapters of<br>a love story</h2>
+            </div>
+            <span class="section-count">I — V</span>
+        </div>
+
+        <div class="video-grid row-1" style="margin-bottom: 2px;">
+            <div class="video-card featured reveal">
+                <div class="video-wrapper">
+                    <!-- THUMB 1: Upload screenshot to Dropbox → share → replace ?dl=0 with ?raw=1 → paste below -->
+                    <video preload="none" poster="https://www.dropbox.com/scl/fi/4rnntieidq6dlwznah4j1/Screenshot_20260505-125934_1.png?rlkey=5589ilzhpvu03278uu5lodqey&st=3tsscfor&raw=1">
+                        <source src="https://www.dropbox.com/scl/fi/6cv8m2muaiaxb8z1iqqh1/TRACK-0.mp4?rlkey=aoh61br9k6vf7cw40wa1s3hm9&st=h3z22obj&raw=1" type="video/mp4">
+                    </video>
+                    <div class="interactive-ui">
+                        <div class="video-overlay"></div>
+                        <div class="video-info">
+                            <div class="video-num">Chapter I</div>
+                            <span class="video-category">Introduction</span>
+                            <h3 class="video-title">Roots &amp; Relations: The Family Montage</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- Caption slides in below on play -->
+                <div class="video-caption">
+                    <div class="video-num">Chapter I &nbsp;·&nbsp; Introduction</div>
+                    <h3 class="video-title">Roots &amp; Relations: The Family Montage</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-grid row-2" style="margin-bottom: 2px;">
+            <div class="video-card reveal">
+                <div class="video-wrapper">
+                    <!-- THUMB 2: paste Dropbox raw link -->
+                    <video preload="none" poster="https://www.dropbox.com/scl/fi/gbg0p05ff1jp72ji4kkki/Screenshot_20260505-125910.png?rlkey=z2i4i0iolpvry0kvqdtz28o1d&st=l2webvlw&raw=1">
+                        <source src="https://www.dropbox.com/scl/fi/mcajbr8fmiiz8hns85d5b/TRACK-1.mp4?rlkey=daxx81453hpndfukjulq5hl6r&st=iy38mega&raw=1" type="video/mp4">
+                    </video>
+                    <div class="interactive-ui">
+                        <div class="video-overlay"></div>
+                      <div class="video-info">
+                            <div class="video-num">Chapter II</div>
+                            <span class="video-category">Soulmates</span>
+                            <h3 class="video-title">Eternal Gaze: Cinematic Verse I</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-caption">
+                    <div class="video-num">Chapter II &nbsp;·&nbsp; Soulmates</div>
+                    <h3 class="video-title">Eternal Gaze: Cinematic Verse I</h3>
+                </div>
+            </div>
+
+            <div class="video-card reveal">
+                <div class="video-wrapper">
+                    <!-- THUMB 3: paste Dropbox raw link -->
+                    <video preload="none" poster="https://www.dropbox.com/scl/fi/0s66victsjybyzzj9sdjr/Screenshot_20260505-125854.png?rlkey=cpwb9rg4ud5aqwxlfu5ch2e8k&st=fgkag86i&raw=1">
+                        <source src="https://www.dropbox.com/scl/fi/fm3d96j4mrw37nui8myo6/TRACK-2.mp4?rlkey=wri9egr5xk9z548yh8ulo5z72&st=0d2fyvrp&raw=1" type="video/mp4">
+                    </video>
+                    <div class="interactive-ui">
+                        <div class="video-overlay"></div>
+                        <div class="video-info">
+                            <div class="video-num">Chapter III</div>
+                            <span class="video-category">The Ritual</span>
+                            <h3 class="video-title">The Sacred Promise: Roka Ceremony</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-caption">
+                    <div class="video-num">Chapter III &nbsp;·&nbsp; The Ritual</div>
+                    <h3 class="video-title">The Sacred Promise: Roka Ceremony</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-grid row-2">
+            <div class="video-card reveal">
+                <div class="video-wrapper">
+                    <!-- THUMB 4: paste Dropbox raw link -->
+                    <video preload="none" poster="https://www.dropbox.com/scl/fi/1fpiysyq2f4jkr4r3lsxn/Screenshot_20260505-125837.png?rlkey=ha3u01mghpv556uicwmkexk1u&st=w54ipr0e&raw=1">
+                        <source src="https://www.dropbox.com/scl/fi/ku15mq5tgogyaizm4tth4/TRACK-3.mp4?rlkey=39urr1bw76xynutu5vyl75knq&st=4e5g8spu&raw=1" type="video/mp4">
+                    </video>
+                    <div class="interactive-ui">
+                        <div class="video-overlay"></div>
+                        <div class="video-info">
+                            <div class="video-num">Chapter IV</div>
+                            <span class="video-category">Love Story</span>
+                            <h3 class="video-title">Hand in Hand: Cinematic Verse II</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-caption">
+                    <div class="video-num">Chapter IV &nbsp;·&nbsp; Love Story</div>
+                    <h3 class="video-title">Hand in Hand: Cinematic Verse II</h3>
+                </div>
+            </div>
+
+            <div class="video-card reveal">
+                <div class="video-wrapper">
+                    <!-- THUMB 5: paste Dropbox raw link -->
+                    <video preload="none" poster="https://www.dropbox.com/scl/fi/x17j9idl5dq0st9nuznwd/Screenshot_20260505-125815.png?rlkey=scsiqp21rrckuec05vthi31s1&st=ikjfre0g&raw=1">
+                        <source src="https://www.dropbox.com/scl/fi/2l6s88742esq5r0qlz4d9/TRACK-4.mp4?rlkey=9250jc2ugdp28ximyczinh7wp&st=96hub269&raw=1" type="video/mp4">
+                    </video>
+                    <div class="interactive-ui">
+                        <div class="video-overlay"></div>
+                        <div class="video-info">
+                            <div class="video-num">Chapter V</div>
+                            <span class="video-category">The Big Moment</span>
+                            <h3 class="video-title">Sealed with a Ring: The Engagement</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-caption">
+                    <div class="video-num">Chapter V &nbsp;·&nbsp; The Big Moment</div>
+                    <h3 class="video-title">Sealed with a Ring: The Engagement</h3>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="footer-ornament reveal">
+            <div class="footer-ornament-line"></div>
+            <div class="section-divider-diamond"></div>
+            <div class="footer-ornament-line"></div>
+        </div>
+
+        <p class="footer-quote reveal">
+            "Enjoy the Engagement &amp; Roka memories.<br>
+            May this journey be as <em>beautiful</em> as these moments."
+        </p>
+
+        <div class="footer-logo reveal">ISHAN Stream</div>
+        <div class="footer-copy">&copy; 2026 ISHAN STREAM &nbsp;&mdash;&nbsp; All Rights Reserved</div>
+    </footer>
+
+    <script>
+        // Bulletproof Scroll Reveal Fix for Vercel / Dynamic Loads
+        const reveals = document.querySelectorAll('.reveal');
+        
+        // Fallback: If intersection observer fails to run within 3 seconds, show everything
+        const fallbackTimer = setTimeout(() => {
+            reveals.forEach(el => el.classList.add('visible'));
+        }, 3000);
+
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries, observer) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        observer.unobserve(e.target);
+                    }
+                });
+            }, { rootMargin: "0px 0px 50px 0px", threshold: 0.05 }); // Lowered threshold for mobile reliability
+
+            reveals.forEach(el => io.observe(el));
+        } else {
+            // If browser doesn't support IntersectionObserver
+            clearTimeout(fallbackTimer);
+            reveals.forEach(el => el.classList.add('visible'));
+        }
+
+        // Stagger child reveals in same parent
+        document.querySelectorAll('.row-2').forEach(row => {
+            const cards = row.querySelectorAll('.video-card');
+            cards.forEach((card, i) => {
+                // Ensure desktop stagger only, let mobile flow naturally
+                if(window.innerWidth > 768) {
+                    card.style.transitionDelay = `${i * 0.15}s`;
+                }
+            });
+        });
+
+        // Advanced Video Playback Script
+        document.querySelectorAll('.video-card').forEach(card => {
+            const video = card.querySelector('video');
+            const caption = card.querySelector('.video-caption');
+
+            card.addEventListener('click', () => {
+                if (video.paused) {
+                    // Pause all other videos first
+                    document.querySelectorAll('video').forEach(v => {
+                        if (v !== video) {
+                            v.pause();
+                            v.closest('.video-card').classList.remove('playing');
+                        }
+                    });
+                    video.setAttribute('controls', 'controls');
+                    video.play();
+                    card.classList.add('playing');
+                    // Smooth scroll so caption is visible
+                    setTimeout(() => {
+                        if (caption) caption.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 300);
+                }
+            });
+
+            // Show UI + hide caption again on pause
+            video.addEventListener('pause', () => {
+                card.classList.remove('playing');
+            });
+
+            // Keep playing class while playing, remove on end
+            video.addEventListener('ended', () => {
+                card.classList.remove('playing');
+                video.removeAttribute('controls');
+            });
+        });
+    </script>
+
+</body>
+</html>
+       
