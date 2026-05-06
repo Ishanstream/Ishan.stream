@@ -26,14 +26,12 @@
         html { scroll-behavior: smooth; }
         body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
 
-        /* ── Grain Overlay ── */
         body::before {
             content: ''; position: fixed; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
             opacity: 0.025; pointer-events: none; z-index: 9999;
         }
 
-        /* ── TOP BAR ── */
         .topbar {
             display: flex; justify-content: space-between; align-items: center;
             padding: 28px 48px; position: fixed; top: 0; left: 0; right: 0;
@@ -42,7 +40,6 @@
         .topbar-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(0.9rem, 2vw, 1.1rem); letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; }
         .topbar-tag  { font-size: 0.65rem; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; display: none; }
 
-        /* ── HERO ── */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
@@ -80,7 +77,6 @@
 
         .hero-desc { font-size: clamp(0.8rem,2vw,0.85rem); color: var(--muted); letter-spacing: 0.08em; max-width: 440px; line-height: 1.9; margin: 0 auto; }
 
-        /* Disclaimer */
         .disclaimer-box {
             max-width: 520px; margin: 32px auto 0; padding: 14px 20px;
             border: 1px solid var(--border); border-radius: 2px;
@@ -96,12 +92,10 @@
         .scroll-line  { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
         .scroll-label { font-size: 0.58rem; letter-spacing: 0.4em; color: var(--muted); text-transform: uppercase; font-family: 'Syne', sans-serif; }
 
-        /* ── DIVIDER ── */
         .section-divider { display: flex; align-items: center; gap: 20px; padding: 0 48px; margin: 0 0 80px; }
         .section-divider-line    { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--border2), transparent); }
         .section-divider-diamond { width: 6px; height: 6px; background: var(--gold-dim); transform: rotate(45deg); }
 
-        /* ── VIDEOS SECTION ── */
         .videos-section { padding: 0 48px 120px; max-width: 1400px; margin: 0 auto; }
 
         .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 20px; }
@@ -109,15 +103,13 @@
         .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.8rem,4vw,3rem); color: var(--cream); letter-spacing: -0.01em; line-height: 1.1; }
         .section-count   { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--muted); }
 
-        /* ── VIDEO GRID ── */
         .video-grid { display: grid; gap: 2px; }
         .row-2 { grid-template-columns: 1fr 1fr; }
         .row-1 { grid-template-columns: 1fr; }
 
-        /* ── VIDEO CARD ── */
         .video-card {
             position: relative;
-            overflow: visible;   /* MUST be visible — action zone expands below */
+            overflow: visible;
             background: var(--bg2); cursor: pointer;
             display: flex; flex-direction: column;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -128,7 +120,6 @@
             box-shadow: 0 16px 40px rgba(0,0,0,0.55), 0 0 0 1px var(--border2);
         }
 
-        /* ── THUMBNAIL WRAPPER ── */
         .video-wrapper {
             position: relative; width: 100%;
             aspect-ratio: 16/9; overflow: hidden; background: #000;
@@ -144,14 +135,12 @@
         .video-card:hover .custom-poster { opacity: 0.55; transform: scale(1.03); }
         .video-card.active .custom-poster { opacity: 0.35; }
 
-        /* Gradient overlay */
         .video-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(8,7,6,0.95) 0%, rgba(8,7,6,0.3) 50%, transparent 100%);
             z-index: 1; pointer-events: none;
         }
 
-        /* Tap hint icon in center */
         .tap-hint {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%,-50%);
@@ -167,7 +156,6 @@
         .video-card:hover .tap-hint { opacity: 1; transform: translate(-50%,-50%) scale(1); }
         .video-card.active .tap-hint { opacity: 0; pointer-events: none; }
 
-        /* Title overlay on thumbnail */
         .video-info {
             position: absolute; bottom: 0; left: 0; right: 0;
             padding: 28px 32px; z-index: 3;
@@ -182,30 +170,26 @@
         .video-title    { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(1rem,2.5vw,1.6rem); color: var(--cream); letter-spacing: 0.01em; line-height: 1.25; }
         .video-card.featured .video-title { font-size: clamp(1.2rem,3vw,2.1rem); }
 
-        /* ── ACTION ZONE — slides in below thumbnail on click ── */
         .action-zone {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto auto;
             gap: 0;
-            background: var(--border);      /* gap line color */
+            background: var(--border);
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1),
-                        opacity    0.4s ease;
+            transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
             opacity: 0;
-            /* Ensure it sits flush below the wrapper */
             position: relative;
             z-index: 10;
         }
         .video-card.active .action-zone {
-            max-height: 250px;   /* big enough for chapter strip + 2 buttons (stacked on mobile too) */
+            max-height: 250px;
             opacity: 1;
         }
 
-        /* Chapter info strip — spans both columns */
         .action-chapter {
-            grid-column: 1 / -1;    /* always full width regardless of col count */
+            grid-column: 1 / -1;
             padding: 12px 20px 10px;
             background: #0c0b09;
             border-top: 1px solid var(--border);
@@ -226,40 +210,28 @@
             color: var(--gold); cursor: pointer;
             transition: background 0.3s ease, color 0.3s ease;
             text-decoration: none; white-space: nowrap;
-            min-height: 52px;    /* consistent tap target */
+            min-height: 52px;
         }
         .action-btn svg { flex-shrink: 0; }
+        .action-btn:hover { background: rgba(201,169,110,0.1); box-shadow: inset 0 0 20px rgba(201,169,110,0.06); }
 
-        .action-btn:hover {
-            background: rgba(201,169,110,0.1);
-            box-shadow: inset 0 0 20px rgba(201,169,110,0.06);
-        }
-
-        /* Loading state */
-        .action-btn.loading {
-            opacity: 0.45; cursor: wait; pointer-events: none;
-        }
+        .action-btn.loading { opacity: 0.45; cursor: wait; pointer-events: none; }
         .action-btn.loading::after {
-            content: '';
-            width: 12px; height: 12px;
-            border: 1px solid var(--gold-dim);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-left: 8px;
+            content: ''; width: 12px; height: 12px;
+            border: 1px solid var(--gold-dim); border-top-color: var(--gold);
+            border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;
         }
 
-        /* Ready state — gold fill */
-        .action-btn.ready {
-            background: rgba(201,169,110,0.15);
-            color: var(--cream);
-            box-shadow: inset 0 0 30px rgba(201,169,110,0.08);
-        }
+        .action-btn.ready { background: rgba(201,169,110,0.15); color: var(--cream); box-shadow: inset 0 0 30px rgba(201,169,110,0.08); }
 
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp  { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+        @keyframes scrollPulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
 
-        /* ── FOOTER ── */
+        .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.9s ease, transform 0.9s ease; will-change:opacity,transform; }
+        .reveal.visible { opacity:1; transform:none; }
+
         footer { border-top: 1px solid var(--border); padding: 100px 48px; text-align: center; }
         .footer-quote  { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: clamp(1.2rem,3vw,1.9rem); color: var(--text); line-height: 1.7; max-width: 700px; margin: 0 auto 50px; }
         .footer-quote em { color: var(--gold); font-style: normal; }
@@ -268,73 +240,15 @@
         .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.2rem,3vw,1.8rem); letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
         .footer-copy { font-size: 0.65rem; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; opacity: 0.5; }
 
-        /* ── ANIMATIONS ── */
-        @keyframes fadeUp  { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
-        @keyframes scrollPulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
-
-        /* ── SCROLL REVEAL ── */
-        .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.9s ease, transform 0.9s ease; will-change:opacity,transform; }
-        .reveal.visible { opacity:1; transform:none; }
-
-        /* ── RESPONSIVE ── */
-        @media (min-width: 769px) { .topbar-tag { display: block; } }
-
-        /* ── TABLET (768px–1024px) ── */
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .videos-section { padding: 0 28px 100px; }
-            .section-divider { padding: 0 28px; }
-            .video-card.featured .video-wrapper { aspect-ratio: 16/9; }
-        }
-
-        /* ── MOBILE (≤768px) ── */
         @media (max-width: 768px) {
             .topbar { padding: 16px 20px; }
-            .topbar-tag { display: none !important; }
             .videos-section { padding: 0 0 80px; }
             .section-divider { padding: 0 16px; margin: 0 0 40px; }
             .section-header { padding: 0 16px; margin-bottom: 32px; }
-
             .row-2 { grid-template-columns: 1fr; }
-            .video-card.featured .video-wrapper,
-            .video-wrapper { aspect-ratio: 16/9; }
-
             .video-info { padding: 18px 16px; transform: translateY(0); }
-            .video-title { font-size: 1rem !important; }
-            .video-num { font-size: 0.68rem; }
-
-            /* Stack buttons on mobile */
             .action-zone { grid-template-columns: 1fr; }
-            .action-chapter { grid-column: 1 / -1; padding: 10px 16px 8px; }
-            .action-btn {
-                border-top: 1px solid var(--border);
-                border-left: none;
-                padding: 16px 16px;
-                font-size: 0.62rem;
-                letter-spacing: 0.22em;
-            }
-            /* On mobile, a little more max-height for stacked layout */
             .video-card.active .action-zone { max-height: 320px; }
-
-            footer { padding: 60px 20px; }
-        }
-
-        /* ── SMALL MOBILE (≤400px) ── */
-        @media (max-width: 400px) {
-            .ornament span { font-size: 0.48rem; letter-spacing: 0.22em; }
-            .hero-wordmark { letter-spacing: 0.06em; }
-            .action-btn { font-size: 0.55rem; letter-spacing: 0.18em; }
-        }
-
-        /* ── TV / LARGE SCREEN (≥1600px) ── */
-        @media (min-width: 1600px) {
-            .videos-section { padding: 0 80px 160px; }
-            .section-divider { padding: 0 80px; }
-            .video-info { padding: 36px 40px; }
-            .action-btn { padding: 20px 16px; font-size: 0.65rem; min-height: 60px; }
-            .action-chapter { padding: 16px 28px 12px; }
-            .action-chapter-label { font-size: 0.9rem; }
-            .video-card.active .action-zone { max-height: 200px; }
         }
     </style>
 </head>
@@ -353,9 +267,7 @@
             <div class="ornament-dot"></div>
             <div class="ornament-line right"></div>
         </div>
-
         <div class="hero-wordmark">ISHAN <span>Stream</span></div>
-
         <div class="hero-subtitle-block">
             <div class="hero-title">Engagement Memories</div>
             <p class="hero-desc">A cinematic journey of love, family, and a beautiful new beginning. Roka &amp; Engagement highlights.</p>
@@ -363,11 +275,7 @@
                 <p class="disclaimer-text">High-speed internet recommended for streaming.<br>Use the download option if the stream limit is reached.</p>
             </div>
         </div>
-
-        <div class="hero-scroll">
-            <div class="scroll-line"></div>
-            <span class="scroll-label">Scroll</span>
-        </div>
+        <div class="hero-scroll"><div class="scroll-line"></div><span class="scroll-label">Scroll</span></div>
     </header>
 
     <div class="section-divider reveal">
@@ -377,7 +285,6 @@
     </div>
 
     <section class="videos-section">
-
         <div class="section-header reveal">
             <div>
                 <div class="section-eyebrow">The Collection</div>
@@ -386,15 +293,12 @@
             <span class="section-count">I — V</span>
         </div>
 
-        <!-- ═══ Chapter I — Featured ═══ -->
         <div class="video-grid row-1" style="margin-bottom:2px;">
             <div class="video-card featured reveal" id="card-0" onclick="toggleCard('card-0')">
                 <div class="video-wrapper">
-                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/4rnntieidq6dlwznah4j1/Screenshot_20260505-125934_1.png?rlkey=5589ilzhpvu03278uu5lodqey&st=3tsscfor&raw=1" alt="Chapter I Thumbnail">
+                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/4rnntieidq6dlwznah4j1/Screenshot_20260505-125934_1.png?rlkey=5589ilzhpvu03278uu5lodqey&st=3tsscfor&raw=1" alt="Chapter I">
                     <div class="video-overlay"></div>
-                    <div class="tap-hint">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
+                    <div class="tap-hint"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
                     <div class="video-info">
                         <div class="video-num">Chapter I</div>
                         <span class="video-category">Introduction</span>
@@ -402,217 +306,163 @@
                     </div>
                 </div>
                 <div class="action-zone">
-                    <div class="action-chapter">
-                        <span class="action-chapter-label">Chapter I &nbsp;·&nbsp; Introduction</span>
-                    </div>
-                    <button class="action-btn" id="play-0" onclick="event.stopPropagation(); handleDropbox('TRACK 0.mp4', 'play-0')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        Stream
-                    </button>
-                    <button class="action-btn" id="dl-0" onclick="event.stopPropagation(); handleDrive('1k0J98-bkSJ7cv49FtfsBLumgrMHlLAQ5', 'dl-0')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download
-                    </button>
+                    <div class="action-chapter"><span class="action-chapter-label">Chapter I &nbsp;·&nbsp; Introduction</span></div>
+                    <button class="action-btn" id="play-0" onclick="event.stopPropagation(); handleDropbox('TRACK 0.mp4', 'play-0')">Stream</button>
+                    <button class="action-btn" id="dl-0" onclick="event.stopPropagation(); handleDrive('1k0J98-bkSJ7cv49FtfsBLumgrMHlLAQ5', 'dl-0')">Download</button>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ Chapters II & III ═══ -->
         <div class="video-grid row-2" style="margin-bottom:2px;">
             <div class="video-card reveal" id="card-1" onclick="toggleCard('card-1')">
                 <div class="video-wrapper">
-                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/gbg0p05ff1jp72ji4kkki/Screenshot_20260505-125910.png?rlkey=z2i4i0iolpvry0kvqdtz28o1d&st=l2webvlw&raw=1" alt="Chapter II Thumbnail">
+                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/gbg0p05ff1jp72ji4kkki/Screenshot_20260505-125910.png?rlkey=z2i4i0iolpvry0kvqdtz28o1d&st=l2webvlw&raw=1" alt="Chapter II">
                     <div class="video-overlay"></div>
-                    <div class="tap-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
                     <div class="video-info">
                         <div class="video-num">Chapter II</div>
-                        <span class="video-category">Soulmates</span>
                         <h3 class="video-title">Eternal Gaze: Cinematic Verse I</h3>
                     </div>
                 </div>
                 <div class="action-zone">
-                    <div class="action-chapter">
-                        <span class="action-chapter-label">Chapter II &nbsp;·&nbsp; Soulmates</span>
-                    </div>
-                    <button class="action-btn" id="play-1" onclick="event.stopPropagation(); handleDropbox('TRACK 1.mp4', 'play-1')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        Stream
-                    </button>
-                    <button class="action-btn" id="dl-1" onclick="event.stopPropagation(); handleDrive('153JqplVLcpcqZ0HFsqVGviXTaDv-r3n3', 'dl-1')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download
-                    </button>
+                    <div class="action-chapter"><span class="action-chapter-label">Chapter II</span></div>
+                    <button class="action-btn" id="play-1" onclick="event.stopPropagation(); handleDropbox('TRACK 1.mp4', 'play-1')">Stream</button>
+                    <button class="action-btn" id="dl-1" onclick="event.stopPropagation(); handleDrive('153JqplVLcpcqZ0HFsqVGviXTaDv-r3n3', 'dl-1')">Download</button>
                 </div>
             </div>
 
             <div class="video-card reveal" id="card-2" onclick="toggleCard('card-2')">
                 <div class="video-wrapper">
-                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/0s66victsjybyzzj9sdjr/Screenshot_20260505-125854.png?rlkey=cpwb9rg4ud5aqwxlfu5ch2e8k&st=fgkag86i&raw=1" alt="Chapter III Thumbnail">
+                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/0s66victsjybyzzj9sdjr/Screenshot_20260505-125854.png?rlkey=cpwb9rg4ud5aqwxlfu5ch2e8k&st=fgkag86i&raw=1" alt="Chapter III">
                     <div class="video-overlay"></div>
-                    <div class="tap-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
                     <div class="video-info">
                         <div class="video-num">Chapter III</div>
-                        <span class="video-category">The Ritual</span>
                         <h3 class="video-title">The Sacred Promise: Roka Ceremony</h3>
                     </div>
                 </div>
                 <div class="action-zone">
-                    <div class="action-chapter">
-                        <span class="action-chapter-label">Chapter III &nbsp;·&nbsp; The Ritual</span>
-                    </div>
-                    <button class="action-btn" id="play-2" onclick="event.stopPropagation(); handleDropbox('TRACK 2.mp4', 'play-2')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        Stream
-                    </button>
-                    <button class="action-btn" id="dl-2" onclick="event.stopPropagation(); handleDrive('1LD2ASoqB7yCvZN75O2MihStWBuyRLHEu', 'dl-2')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download
-                    </button>
+                    <div class="action-chapter"><span class="action-chapter-label">Chapter III</span></div>
+                    <button class="action-btn" id="play-2" onclick="event.stopPropagation(); handleDropbox('TRACK 2.mp4', 'play-2')">Stream</button>
+                    <button class="action-btn" id="dl-2" onclick="event.stopPropagation(); handleDrive('1LD2ASoqB7yCvZN75O2MihStWBuyRLHEu', 'dl-2')">Download</button>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ Chapters IV & V ═══ -->
         <div class="video-grid row-2">
             <div class="video-card reveal" id="card-3" onclick="toggleCard('card-3')">
                 <div class="video-wrapper">
-                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/1fpiysyq2f4jkr4r3lsxn/Screenshot_20260505-125837.png?rlkey=ha3u01mghpv556uicwmkexk1u&st=w54ipr0e&raw=1" alt="Chapter IV Thumbnail">
+                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/1fpiysyq2f4jkr4r3lsxn/Screenshot_20260505-125837.png?rlkey=ha3u01mghpv556uicwmkexk1u&st=w54ipr0e&raw=1" alt="Chapter IV">
                     <div class="video-overlay"></div>
-                    <div class="tap-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
                     <div class="video-info">
                         <div class="video-num">Chapter IV</div>
-                        <span class="video-category">Love Story</span>
                         <h3 class="video-title">Hand in Hand: Cinematic Verse II</h3>
                     </div>
                 </div>
                 <div class="action-zone">
-                    <div class="action-chapter">
-                        <span class="action-chapter-label">Chapter IV &nbsp;·&nbsp; Love Story</span>
-                    </div>
-                    <button class="action-btn" id="play-3" onclick="event.stopPropagation(); handleDropbox('TRACK 3.mp4', 'play-3')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        Stream
-                    </button>
-                    <button class="action-btn" id="dl-3" onclick="event.stopPropagation(); handleDrive('1OGcHkKCcZetubQEQv_S2c1I_Pdxxzcw6', 'dl-3')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download
-                    </button>
+                    <div class="action-chapter"><span class="action-chapter-label">Chapter IV</span></div>
+                    <button class="action-btn" id="play-3" onclick="event.stopPropagation(); handleDropbox('TRACK 3.mp4', 'play-3')">Stream</button>
+                    <button class="action-btn" id="dl-3" onclick="event.stopPropagation(); handleDrive('1OGcHkKCcZetubQEQv_S2c1I_Pdxxzcw6', 'dl-3')">Download</button>
                 </div>
             </div>
 
             <div class="video-card reveal" id="card-4" onclick="toggleCard('card-4')">
                 <div class="video-wrapper">
-                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/x17j9idl5dq0st9nuznwd/Screenshot_20260505-125815.png?rlkey=scsiqp21rrckuec05vthi31s1&st=ikjfre0g&raw=1" alt="Chapter V Thumbnail">
+                    <img class="custom-poster" src="https://www.dropbox.com/scl/fi/x17j9idl5dq0st9nuznwd/Screenshot_20260505-125815.png?rlkey=scsiqp21rrckuec05vthi31s1&st=ikjfre0g&raw=1" alt="Chapter V">
                     <div class="video-overlay"></div>
-                    <div class="tap-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
                     <div class="video-info">
                         <div class="video-num">Chapter V</div>
-                        <span class="video-category">The Big Moment</span>
                         <h3 class="video-title">Sealed with a Ring: The Engagement</h3>
                     </div>
                 </div>
                 <div class="action-zone">
-                    <div class="action-chapter">
-                        <span class="action-chapter-label">Chapter V &nbsp;·&nbsp; The Big Moment</span>
-                    </div>
-                    <button class="action-btn" id="play-4" onclick="event.stopPropagation(); handleDropbox('TRACK 4.mp4', 'play-4')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        Stream
-                    </button>
-                    <button class="action-btn" id="dl-4" onclick="event.stopPropagation(); handleDrive('1kM4m_ojMCPlPjCEgsOZT6nSdQbBHjnRf', 'dl-4')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download
-                    </button>
+                    <div class="action-chapter"><span class="action-chapter-label">Chapter V</span></div>
+                    <button class="action-btn" id="play-4" onclick="event.stopPropagation(); handleDropbox('TRACK 4.mp4', 'play-4')">Stream</button>
+                    <button class="action-btn" id="dl-4" onclick="event.stopPropagation(); handleDrive('1kM4m_ojMCPlPjCEgsOZT6nSdQbBHjnRf', 'dl-4')">Download</button>
                 </div>
             </div>
         </div>
-
     </section>
 
     <footer>
-        <div class="footer-ornament reveal">
-            <div class="footer-ornament-line"></div>
-            <div class="section-divider-diamond"></div>
-            <div class="footer-ornament-line"></div>
-        </div>
-        <p class="footer-quote reveal">
-            "Enjoy the Engagement &amp; Roka memories.<br>
-            May this journey be as <em>beautiful</em> as these moments."
-        </p>
+        <div class="footer-ornament reveal"><div class="footer-ornament-line"></div><div class="section-divider-diamond"></div><div class="footer-ornament-line"></div></div>
+        <p class="footer-quote reveal">"Enjoy the Engagement &amp; Roka memories.<br>May this journey be as <em>beautiful</em> as these moments."</p>
         <div class="footer-logo reveal">ISHAN Stream</div>
         <div class="footer-copy">&copy; 2026 ISHAN STREAM &nbsp;&mdash;&nbsp; All Rights Reserved</div>
     </footer>
 
-    <!-- ══ BLOCK 1: Scroll Reveal — runs independently, never breaks ══ -->
     <script>
         (function() {
             var reveals = document.querySelectorAll('.reveal');
-
-            // Fallback: force visible after 3s no matter what
-            var fallback = setTimeout(function() {
-                reveals.forEach(function(el) { el.classList.add('visible'); });
-            }, 3000);
-
+            var fallback = setTimeout(function() { reveals.forEach(function(el) { el.classList.add('visible'); }); }, 3000);
             if ('IntersectionObserver' in window) {
                 var io = new IntersectionObserver(function(entries, observer) {
-                    entries.forEach(function(e) {
-                        if (e.isIntersecting) {
-                            e.target.classList.add('visible');
-                            observer.unobserve(e.target);
-                        }
-                    });
+                    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
                 }, { rootMargin: '0px 0px 50px 0px', threshold: 0.05 });
                 reveals.forEach(function(el) { io.observe(el); });
-            } else {
-                clearTimeout(fallback);
-                reveals.forEach(function(el) { el.classList.add('visible'); });
-            }
-
-            // Stagger row-2 cards on desktop
-            if (window.innerWidth > 768) {
-                document.querySelectorAll('.row-2').forEach(function(row) {
-                    row.querySelectorAll('.video-card').forEach(function(card, i) {
-                        card.style.transitionDelay = (i * 0.15) + 's';
-                    });
-                });
-            }
+            } else { clearTimeout(fallback); reveals.forEach(function(el) { el.classList.add('visible'); }); }
         })();
-    </script>
 
-    <!-- ══ BLOCK 2: Toggle + API logic — paste tokens here safely ══ -->
-    <script>
-        // ── PASTE YOUR DROPBOX API TOKENS BELOW ──
-        // Safe: use double quotes, tokens go inside. If token itself has ", replace with \"
-        var TOKEN_1 = "sl.u.AGcHJrHrJXgCBGDV2jZb7GKaqKwwRinywOxDaHmUIFT1SHYGt897GE19NIgBTtKYlgrNuqD7nNnY4uGGunRYT1h2u5n5QCon9tiIZPHHfCVAyXFCxnGKhPc-3VLv_2IlhdLAftZ6Ww7YKXJGua94D86CWYUgCwMDfQwfLe_LXTVBOOxCOpEfLGKld_axjoY2dwTi9wJybBNPBe2Pl6HXMbq_F9pEWA0XtVl8ifkAQOdpEglma66awfzpWsN_s9VMZ8uHZN9SURJkViqLBhPg-FM4lZSYdUoChMcRTysD1wwXOk90Rts8geQC2vyAyayXqr41gXvHlYTAoPJSzye7WipNCegqfvNoJSHKHe0kEOcZVlj27j3SFhka8tdr-oAfM2TFmvBymC2NqT3zCf1D90aG0SDEGXHxxr760ic8YksLPJlWGAIn7ab-hAppfw727ZPc9qXSgKv3DShq4wJU4cCXkJT6cXBFr5BQUxxBkNqdUf7CLKokou5uWy7Tnd6wtMyegJC5fARCu7GL0sDRJINyz9HREygGJD41hWG1g8pAZpwvwLMbs6tcTSf29zAZic9KeR83QtclCxcpkqqR9vIebXbkYatN6wEprCYOUYitElIkIPk4cNeEVtS38ySs9vPFA8QreUwUOmoZ83-t-q7fXq2r6mED1z4qW5qv5Awo9iM-3hgigWvUMSlLgOZ9Rebr4AdUUp_UKoLlBcd2g5-lEIhCPG3L8kyLSKA75wUFn-5OOfNN2t9pp3jrosDHjQX47VTidEjjKZlvpCs5cV-fkdbhclbHmx1nUUeVAlYkVxUjddj3t14RbOqDNs5z7nmMraRDlFKhOsHGtRxJMLnKoYTvUhhKQH8n8ns3KZlgnUiGtdnLtRzIxtHg06jh0F_sVWtfbtqp1ilnxHDuxjMMwl5A5Q6385YClJ0n0srg3ZHaR_tT5hq6S_cWGnUPQyAr6nFFJG_IZrPUBi4yRePoL-uyhMPnjEoVRS29eJxAADxGliqZLsW74oX5HbO7knTmtn7C_cGDlwHcrHCUSLCqojZgRzep2pJVe-YoLfizHJgZBIJvOM0ktx2T7Ib2sEBPTlqnv-olsKCuzvZrC-MwvBan9wQF2zy5XJznp-Pwb53GvTzH5JjrEUAEo-lesOU1NYuF72Rs94lwy6uu9ogUGJfcdmolVNb7RU7bfC1fFI19VaPFlbTbrFB1BtCPhlgg64zHl2thMJSNDLOouNCLShyeq1-wIB_TrPrrbULPvWMAVo5Qr1MizCjMfVja8mfjLn15j3kcYAzf-mXtr5yvl6tBJBrGbWryOJrtCqe81zP2twlTtvh7_9JmhUzH7LkWiTNzll6raxtsEKTt48mi9k8PQmBFmDwr9IRc6zPS7ZHJHH193a1vQlAQrUguWM3t3dykFhL9P6je0ulBg53g";   // For TRACK 0–3
-        var TOKEN_2 = "sl.u.AGee7-Fj5_TIaX09WdrJ9EWqoIaKH1PcqEA8OKIIkPZ-kBZ_-7klCMzZ_TjPao5putYlWqLla4ytaEG3po_kWNQGvqoYRayzEGWzpgM-hFNee3nUe7p-JMjQMFP6jbaJpJ_OyoR_1ZV0qEJ-156V9BOnrEwMX6BEdpTayKRIxzP_kmfdav5FhXj6-ZK4yMI8EDRlUd4YIInhcw2TOEs32vNtm7yesoLWN28CXkFcreArGCj-XepQcoGn6MNZ-SM2RmzRuO55p3YBxQwdq5RkZe3hkogqMrYA5JIMNVe3SP2pbzedehd2-53wXhNTMaRO-U-K8UefVswvFL1PA4Iqu5cnz2UPyLvJvRxXFr_CzMfFQ627t1sYOXQxEeLIfFcABjhByfFKScwzNP_CCINBlFASkXwhhRyA9d_fqSfS8NW3WhfXoY_fJXhE2IWAe2fZC-2ARcFFqpYsRAG3lgNdtwB7-_YABVV_vCF5Ax4Fp2frMKzFQBZzROe1--IQwzIAv1WPGoCdHIIGOsdsYM9RYconSka82LHmkdf5Lqgc-gAFrcjpg0hRhEHILRaDM_l0J30JrTXrmkRbxc8nD1PD-oRnaoexCp4WUBJnXOvPDCcwQC47JuVKjGuJ57fCoJ76E9Sovh8HHfscG7RHOhcWwHwgNrwlaeggzObCGIRE0eqgE_23bF2zuXGQOVEEkIWtCaTKrni54nn6L_X44X4JBwCziFkM48Ocy4ak-pu0b5DjcKh_6_ijvLLPdroFapMWm0b7ILrhmklId4x8Dd1eyt6u81aZU73HETYO7GW3I_Hji_BI2IBTsHlDXWpQNEwfA3MeBiHd9cURitXEu50zf86jv6klWaGBOJdRGjVYQ7uhFsTM5IbBrqjfr4t0pzNdDntdDYI4-dcrKOVvIJc6kEa_9PGmpYz9g0qzXWbQsPtQvg_mPxisrNoh0dXIMVQc7WzI0KBfWt1tgxuHLyRwQP-hOkAwZjDjbn7bCuATJuo7RKkSXJLcRIPIFV9YiPm_KbxSYPTDnue-r3HM-WC-6-JyEPBXlTwagWqrCfN_82r4w6O3maYIVXYZluNM50kw4uWtisrRJZostFHBKVU8YfJc3GI2ZgsV8JmCEPEN4pURMdFIEHl30XZnoXdPAi7PKqBV28ALByeCnoyjRwPrO1qTliwHDEfrK_bfDoIpPnVYmVjOavoAkiNbfSdg3xxZcgySNwANl1BZEHSlqWCUKRYpnZSTNeBAReAbufDzwHAsy3_x-K__mn8Z1iFEFM14I3FFHfylc0aUEQhRa1d9UdtDuFkAuikdmMdL4qL1jHvK6LGZwKXIptSheHnXK-j6jlAlDF-P2U2ZXT7fhUYMSBA-drYFJHpnFAjWzwEPoUenkwkvoYi8tEn33pyeJpPReuJGelVfAQsgdJEXuw37pxEfACMCdJ-b0ru299IL257dzA";  // For TRACK 4
+        // ── 1. CONFIGURATION (Dono accounts ki values yahan dalo) ──
+        const ACCOUNTS = {
+            1: { // For TRACK 0 to 3
+                refresh_token: "ZIXQQBqLrNgAAAAAAAAAAQR2oHSwwS3Wn6zYcqmiTB64MtCNl8t6X2wdpNuY4Nct",
+                app_key:       "wwpq9kb254s3vb1",
+                app_secret:    "mtkrcl2tndlp8d0"
+            },
+            2: { // For TRACK 4
+                refresh_token: "PfQE8gunAXIAAAAAAAAAAWD9dGM656y4RsuKHW5JWXtYjS90EbP9-2J-DazUzApH",
+                app_key:       "6scxjk6h6t1ng18",
+                app_secret:    "hb35z46wz38hb9h"
+            }
+        };
 
         function toggleCard(cardId) {
             var card = document.getElementById(cardId);
             var wasActive = card.classList.contains('active');
-            document.querySelectorAll('.video-card').forEach(function(c) {
-                c.classList.remove('active');
-            });
+            document.querySelectorAll('.video-card').forEach(function(c) { c.classList.remove('active'); });
             if (!wasActive) {
                 card.classList.add('active');
-                setTimeout(function() {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 200);
+                setTimeout(function() { card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 200);
             }
+        }
+
+        async function getFreshAccessToken(accNum) {
+            const acc = ACCOUNTS[accNum];
+            try {
+                const response = await fetch('https://api.dropbox.com/oauth2/token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        'grant_type': 'refresh_token',
+                        'refresh_token': acc.refresh_token,
+                        'client_id': acc.app_key,
+                        'client_secret': acc.app_secret
+                    })
+                });
+                const data = await response.json();
+                return data.access_token || null;
+            } catch (err) { return null; }
         }
 
         async function handleDropbox(fileName, btnId) {
             var btn = document.getElementById(btnId);
             if (btn.classList.contains('ready')) return;
-
-            btn.textContent = 'Generating...';
+            btn.textContent = 'Auth...';
             btn.classList.add('loading');
 
-            var token = (fileName === 'TRACK 4.mp4') ? TOKEN_2 : TOKEN_1;
+            var accNum = (fileName === 'TRACK 4.mp4') ? 2 : 1;
+            const accessToken = await getFreshAccessToken(accNum);
+            
+            if (!accessToken) { 
+                btn.textContent = 'Auth Error'; 
+                btn.classList.remove('loading');
+                return; 
+            }
 
+            btn.textContent = 'Generating...';
             try {
                 var res = await fetch('https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings', {
                     method: 'POST',
-                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ path: '/' + fileName })
                 });
                 var data = await res.json();
@@ -621,35 +471,26 @@
                 if (data.error_summary && data.error_summary.includes('shared_link_already_exists')) {
                     var list = await fetch('https://api.dropboxapi.com/2/sharing/list_shared_links', {
                         method: 'POST',
-                        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                        headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
                         body: JSON.stringify({ path: '/' + fileName, direct_only: true })
                     });
                     var listData = await list.json();
                     url = listData.links[0].url;
-                } else {
-                    url = data.url;
-                }
+                } else { url = data.url; }
 
                 var finalLink = url.replace('dl=0', 'raw=1');
                 btn.classList.remove('loading');
                 btn.classList.add('ready');
                 btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Open';
                 btn.onclick = function(e) { e.stopPropagation(); window.open(finalLink, '_blank'); };
-
-            } catch (err) {
-                btn.classList.remove('loading');
-                btn.textContent = 'Error — Retry';
-                console.error(err);
-            }
+            } catch (err) { btn.classList.remove('loading'); btn.textContent = 'Error'; }
         }
 
         function handleDrive(driveId, btnId) {
             var btn = document.getElementById(btnId);
             if (btn.classList.contains('ready')) return;
-
             btn.textContent = 'Fetching...';
             btn.classList.add('loading');
-
             setTimeout(function() {
                 var dlLink = 'https://drive.google.com/uc?export=download&id=' + driveId;
                 btn.classList.remove('loading');
@@ -659,6 +500,5 @@
             }, 600);
         }
     </script>
-
 </body>
 </html>
